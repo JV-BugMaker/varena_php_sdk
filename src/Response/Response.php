@@ -4,7 +4,7 @@ namespace Varena\SDK\Response;
 
 class Response
 {
-    const SUCCESS = 0;
+    const SUCCESS = 200;
 
     public static function successJsonResponse(array $data, string $message = ''): array
     {

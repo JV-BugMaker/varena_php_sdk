@@ -2,6 +2,7 @@
 
 namespace Varena\SDK\Request\Traits;
 
+use Varena\SDK\Common\InfoLevel;
 use Varena\SDK\Exception\APIException;
 use Varena\SDK\Response\Response;
 
@@ -45,17 +46,27 @@ trait VarenaRequestTrait
      */
     protected function checkStatus($contents)
     {
-        if (isset($contents['status'])) {
-            $status = intval($contents['status']);
+        if (isset($contents['retcode'])) {
+            $retcode = intval($contents['retcode']);
             //临时兼容前台api
-            if ($status !== Response::SUCCESS && $status !== 101) {
+            if ($retcode !== Response::SUCCESS) {
                 throw new APIException(
                     $contents['message'],
                     $this->getRequestUrl(),
                     $contents,
-                    $this->getRequestOptions()
+                    $this->getRequestOptions(),
+                    InfoLevel::ERROR,
+                    $retcode
                 );
             }
+        }else{
+            throw new APIException(
+                'server error in error',
+                $this->getRequestUrl(),
+                $contents,
+                $this->getRequestOptions(),
+                InfoLevel::ERROR
+            );
         }
     }
 }

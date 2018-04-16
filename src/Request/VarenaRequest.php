@@ -26,13 +26,9 @@ class VarenaRequest extends AbstractRequest
 
     public function __construct(string $key,string $sercert)
     {
+        self::$_key = $key;
+        self::$_secert = $sercert;
         parent::__construct();
-        if(is_null(self::$_instance)){
-            self::$_instance = new self();
-            self::$_key = $key;
-            self::$_secert = $sercert;
-        }
-
     }
 
     /***
