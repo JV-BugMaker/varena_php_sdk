@@ -1,0 +1,9 @@
+vendor
+.idea
+tags
+
+.project
+.buildpath
+.settings
+
+composer.phar

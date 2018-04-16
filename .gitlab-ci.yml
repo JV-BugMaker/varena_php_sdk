@@ -1,0 +1,6 @@
+before_script:
+  - ./syntax_check.sh
+  - composer install
+phpunit:
+  script:
+    - vendor/bin/phpunit
